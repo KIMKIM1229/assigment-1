@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>瑜伽動作清單</title>
+    <!-- Ionic CDN -->
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
+    ></script>
+    <script
+      nomodule
+      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
+    />
+    <style>
+      /* 添加基本的樣式，這些樣式會優化頁面顯示 */
+      .item-content {
+        padding: 1rem;
+      }
+
+      .item-title {
+        font-size: 1.5em;
+        font-weight: bold;
+      }
+
+      .item-subtitle {
+        font-size: 1.1em;
+        color: var(--ion-color-medium);
+      }
+
+      .item-details {
+        font-size: 1em;
+        margin-top: 0.5rem;
+      }
+
+      img {
+        max-width: 100%;
+        margin-top: 0.5rem;
+        border-radius: 8px;
+      }
+
+      iframe {
+        margin-top: 1rem;
+        border-radius: 8px;
+      }
+
+      .tag-container {
+        margin-top: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      ion-chip {
+        font-size: 0.9em;
+      }
+    </style>
+  </head>
+  <body>
+    <ion-app>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>瑜伽動作清單</ion-title>
+        </ion-toolbar>
+        <ion-searchbar placeholder="搜尋..." id="searchBar"></ion-searchbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-list id="poseList">
+          <!-- 這裡會顯示清單項目 -->
+        </ion-list>
+      </ion-content>
+    </ion-app>
+
+    <script>
+      const items = [
+        {
+          title: '下犬式',
+          level: '初階',
+          benefits: '伸展脊椎、腿後肌群',
+          caution: '肩頸受傷者請避免',
+          category: '伸展',
+          tags: ['腿部', '背部'],
+          imageUrl: 'https://hips.hearstapps.com/hmg-prod/images/gettyimages-1066259462-665f07385f296.jpg?crop=1.00xw:0.755xh;0,0&resize=1200:*',
+          videoUrl: 'https://www.youtube.com/embed/YwFOL6vFfhE'
+        },
+        {
+          title: '戰士二式',
+          level: '中階',
+          benefits: '強化腿部、提升穩定性',
+          caution: '膝蓋問題請注意角度',
+          category: '強化',
+          tags: ['腿部', '核心'],
+          imageUrl: 'https://via.placeholder.com/300x300?text=Warrior+II',
+          videoUrl: 'https://www.youtube.com/embed/u1a8ICIQS90'
+        },
+        {
+          title: '樹式',
+          level: '初階',
+          benefits: '提升平衡感與專注力',
+          caution: '避免站不穩時跌倒',
+          category: '平衡',
+          tags: ['平衡', '集中'],
+          imageUrl: 'https://via.placeholder.com/300x300?text=Tree+Pose',
+          videoUrl: 'https://www.youtube.com/embed/s8n-IU7e1V4'
+        }
+      ];
+
+      let searchKeyword = '';  // 用來儲存搜尋關鍵字
+
+      document.querySelector('#searchBar').addEventListener('ionInput', (event) => {
+        searchKeyword = event.target.value.toLowerCase();  // 取得小寫的搜尋關鍵字
+        updateList();  // 呼叫 updateList 函數更新顯示
+      });
+
+      function updateList() {
+        const list = document.querySelector('ion-list');
+        list.innerHTML = '';  // 清空現有的清單
+
+        // 篩選符合搜尋關鍵字的瑜伽動作
+        const filteredItems = items.filter(item => {
+          const keyword = searchKeyword.toLowerCase();
+          return (
+            item.title.toLowerCase().includes(keyword) ||
+            item.benefits.toLowerCase().includes(keyword)
+          );
+        });
+
+        // 動態顯示過濾後的項目
+        filteredItems.forEach(item => {
+          const ionItem = document.createElement('ion-item');
+          ionItem.innerHTML = `
+            <div class="item-content">
+              <div class="item-title">${item.title}</div>
+              <div class="item-subtitle">難度：${item.level}</div>
+              <div class="item-details">效果：${item.benefits}<br>注意事項：${item.caution}</div>
+              <img src="${item.imageUrl}" alt="${item.title}" style="width: 100%; max-width: 300px; margin-top: 0.5rem;" />
+              <div style="margin-top: 0.5rem;">
+                <iframe width="100%" height="200" src="${item.videoUrl}" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <div class="tag-container">
+                <ion-chip size="small" color="primary">${item.category}</ion-chip>
+                ${item.tags.map(tag => `<ion-chip size="small">${tag}</ion-chip>`).join('')}
+              </div>
+            </div>
+          `;
+          list.appendChild(ionItem);
+        });
+      }
+
+      updateList();  // 初始顯示所有項目
+    </script>
+  </body>
+</html>
+
