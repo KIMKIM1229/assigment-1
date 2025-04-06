@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>瑜伽動作清單</title>
-    <!-- Ionic CDN -->
     <script
       type="module"
       src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
@@ -18,46 +17,36 @@
       href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
     />
     <style>
-      /* 添加基本的樣式，這些樣式會優化頁面顯示 */
+      body {
+        font-family: system-ui;
+      }
       .item-content {
-        padding: 1rem;
+        width: 100%;
       }
-
       .item-title {
-        font-size: 1.5em;
         font-weight: bold;
-      }
-
-      .item-subtitle {
         font-size: 1.1em;
+      }
+      .item-subtitle {
         color: var(--ion-color-medium);
+        margin: 0.25rem 0;
       }
-
       .item-details {
-        font-size: 1em;
+        font-size: 0.95em;
+        margin-bottom: 0.5rem;
+      }
+      .media {
         margin-top: 0.5rem;
       }
-
-      img {
-        max-width: 100%;
-        margin-top: 0.5rem;
-        border-radius: 8px;
+      ion-img {
+        max-height: 200px;
+        object-fit: cover;
       }
-
-      iframe {
-        margin-top: 1rem;
-        border-radius: 8px;
-      }
-
       .tag-container {
-        margin-top: 1rem;
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
-      }
-
-      ion-chip {
-        font-size: 0.9em;
+        margin-top: 0.5rem;
       }
     </style>
   </head>
@@ -67,12 +56,18 @@
         <ion-toolbar>
           <ion-title>瑜伽動作清單</ion-title>
         </ion-toolbar>
-        <ion-searchbar placeholder="搜尋..." id="searchBar"></ion-searchbar>
+        <ion-searchbar placeholder="搜尋..." debounce="500"></ion-searchbar>
+        <ion-select id="categorySelect" label="分類" interface="popover">
+          <ion-select-option value="">全部</ion-select-option>
+          <ion-select-option value="初學者">初學者</ion-select-option>
+          <ion-select-option value="進階">進階</ion-select-option>
+          <ion-select-option value="放鬆">放鬆</ion-select-option>
+        </ion-select>
       </ion-header>
 
       <ion-content>
         <ion-list id="poseList">
-          <!-- 這裡會顯示清單項目 -->
+          <!-- 清單將由 JavaScript 動態生成 -->
         </ion-list>
       </ion-content>
     </ion-app>
@@ -84,7 +79,7 @@
           level: '初階',
           benefits: '伸展脊椎、腿後肌群',
           caution: '肩頸受傷者請避免',
-          category: '伸展',
+          category: '初學者',
           tags: ['腿部', '背部'],
           imageUrl: 'https://hips.hearstapps.com/hmg-prod/images/gettyimages-1066259462-665f07385f296.jpg?crop=1.00xw:0.755xh;0,0&resize=1200:*',
           videoUrl: 'https://www.youtube.com/embed/YwFOL6vFfhE'
@@ -111,27 +106,24 @@
         }
       ];
 
-      let searchKeyword = '';  // 用來儲存搜尋關鍵字
+      let searchKeyword = '';
+      let selectedCategory = '';
 
-      document.querySelector('#searchBar').addEventListener('ionInput', (event) => {
-        searchKeyword = event.target.value.toLowerCase();  // 取得小寫的搜尋關鍵字
-        updateList();  // 呼叫 updateList 函數更新顯示
-      });
-
+      // 更新顯示清單的函數
       function updateList() {
         const list = document.querySelector('ion-list');
-        list.innerHTML = '';  // 清空現有的清單
+        list.innerHTML = '';
 
-        // 篩選符合搜尋關鍵字的瑜伽動作
         const filteredItems = items.filter(item => {
-          const keyword = searchKeyword.toLowerCase();
-          return (
-            item.title.toLowerCase().includes(keyword) ||
-            item.benefits.toLowerCase().includes(keyword)
-          );
+          // 過濾邏輯：同時考慮搜尋關鍵字和分類
+          const matchesSearch = item.title.toLowerCase().includes(searchKeyword.toLowerCase()) ||
+                                item.benefits.toLowerCase().includes(searchKeyword.toLowerCase());
+          const matchesCategory = selectedCategory ? item.category === selectedCategory : true;
+
+          return matchesSearch && matchesCategory;
         });
 
-        // 動態顯示過濾後的項目
+        // 將過濾後的項目動態顯示
         filteredItems.forEach(item => {
           const ionItem = document.createElement('ion-item');
           ionItem.innerHTML = `
@@ -153,7 +145,22 @@
         });
       }
 
-      updateList();  // 初始顯示所有項目
+      // 監聽搜尋框的輸入
+      document.querySelector('ion-searchbar').addEventListener('ionInput', (event) => {
+        searchKeyword = event.target.value;
+        updateList();
+      });
+
+      // 監聽分類選擇改變事件
+      document.querySelector('ion-select').addEventListener('ionChange', (event) => {
+        selectedCategory = event.detail.value;
+        updateList();
+      });
+
+      // 當頁面加載完成時顯示清單
+      document.addEventListener('DOMContentLoaded', () => {
+        updateList();
+      });
     </script>
   </body>
 </html>

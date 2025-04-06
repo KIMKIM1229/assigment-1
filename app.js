@@ -55,51 +55,38 @@ let items = [
   ];
   
   // 初始化與更新清單
+  // 修改 updateList() 來根據分類過濾項目
   function updateList() {
-    const list = document.querySelector('ion-list');
-    list.innerHTML = ''; // 清空列表內容
-    
-    items.forEach(item => {
-      const ionItem = document.createElement('ion-item');
-      ionItem.innerHTML = `
-        <div class="item-content">
-          <!-- 標題：最重要信息 -->
-          <div class="item-title" style="font-size: 1.5em; font-weight: bold;">${item.title}</div>
-  
-          <!-- 顯示難度，使用較小字體 -->
-          <div class="item-subtitle" style="font-size: 1.1em; color: var(--ion-color-medium);">難度：${item.level}</div>
-          
-          <!-- 顯示效果與注意事項 -->
-          <div class="item-details" style="font-size: 1em; margin-top: 0.5rem;">
-            <strong>效果：</strong>${item.benefits}<br>
-            <strong>注意事項：</strong>${item.caution}
-          </div>
-  
-          <!-- 圖片：動作的實際圖片 -->
-          <img src="${item.imageUrl}" alt="${item.title}" style="width: 100%; max-width: 300px; margin-top: 0.5rem; border-radius: 8px;" />
-  
-          <!-- 影片：用於教學 -->
-          <div style="margin-top: 1rem;">
-            <iframe width="100%" height="200" src="${item.videoUrl}" frameborder="0" allowfullscreen></iframe>
-          </div>
-  
-          <!-- 標籤：分類，使用較小字體 -->
-          <div class="tag-container" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-            <ion-chip size="small" color="primary">${item.category}</ion-chip>
-            ${item.tags.map(tag => `<ion-chip size="small">${tag}</ion-chip>`).join('')}
-          </div>
+  const list = document.querySelector('ion-list'); // 取得 ion-list 元件
+  list.innerHTML = ''; // 清空現有清單
+
+  // 根據搜尋關鍵字過濾項目
+  const filteredItems = items.filter((item) => {
+    const keyword = searchKeyword.toLowerCase();
+    return (
+      item.title.toLowerCase().includes(keyword) || // 檢查標題
+      item.benefits.toLowerCase().includes(keyword)   // 檢查效果
+    );
+  });
+
+  // 顯示過濾後的項目
+  filteredItems.forEach((item) => {
+    const ionItem = document.createElement('ion-item');
+    ionItem.innerHTML = `
+      <div class="item-content">
+        <div class="item-title">${item.title}</div>
+        <div class="item-subtitle">難度：${item.level}</div>
+        <div class="item-details">效果：${item.benefits}<br>注意事項：${item.caution}</div>
+        <img src="${item.imageUrl}" alt="${item.title}" style="width: 100%; max-width: 300px; margin-top: 0.5rem;" />
+        <div style="margin-top: 0.5rem;">
+          <iframe width="100%" height="200" src="${item.videoUrl}" frameborder="0" allowfullscreen></iframe>
         </div>
-      `;
-      list.appendChild(ionItem); // 將每個項目加入清單
-    });
-  }
-  
-  
-  
-  // 搜尋與分類功能
-  document.getElementById('searchbar').addEventListener('ionInput', updateList);
-  document.getElementById('categorySelect').addEventListener('ionChange', updateList);
-  
-  // 頁面載入時顯示全部
-  window.addEventListener('load', updateList);
-  
+        <div class="tag-container">
+          <ion-chip size="small" color="primary">${item.category}</ion-chip>
+          ${item.tags.map((tag) => `<ion-chip size="small">${tag}</ion-chip>`).join('')}
+        </div>
+      </div>
+    `;
+    list.appendChild(ionItem);
+  });
+}
