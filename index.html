@@ -4,28 +4,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>瑜伽動作清單</title>
-    <script
-      type="module"
-      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"
-    ></script>
-    <script
-      nomodule
-      src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"
-    ></script>
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"
-    />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css" />
     <style>
       body {
         font-family: system-ui;
+        margin: 0;
+        padding: 0;
+      }
+      ion-content {
+        padding: 1rem;
       }
       .item-content {
         width: 100%;
       }
       .item-title {
         font-weight: bold;
-        font-size: 1.1em;
+        font-size: 1.2em;
       }
       .item-subtitle {
         color: var(--ion-color-medium);
@@ -35,109 +31,276 @@
         font-size: 0.95em;
         margin-bottom: 0.5rem;
       }
-      .media {
-        margin-top: 0.5rem;
-      }
-      ion-img {
-        max-height: 200px;
-        object-fit: cover;
-      }
       .tag-container {
         display: flex;
         flex-wrap: wrap;
         gap: 0.5rem;
         margin-top: 0.5rem;
       }
+      img {
+        width: 100%;
+        max-width: 300px;
+        margin-top: 0.5rem;
+        border-radius: 0.5rem;
+      }
+      iframe {
+        width: 100%;
+        max-width: 500px;
+        height: 200px;
+        border-radius: 0.5rem;
+        margin-top: 0.5rem;
+      }
+      @media screen and (max-width: 480px) {
+        iframe {
+          height: 180px;
+        }
+      }
     </style>
   </head>
   <body>
     <ion-app>
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar color="primary">
           <ion-title>瑜伽動作清單</ion-title>
         </ion-toolbar>
-        <ion-searchbar placeholder="搜尋..." debounce="500"></ion-searchbar>
-        <ion-select id="categorySelect" label="分類" interface="popover">
-          <ion-select-option value="">全部</ion-select-option>
-          <ion-select-option value="初學者">初學者</ion-select-option>
-          <ion-select-option value="進階">進階</ion-select-option>
-          <ion-select-option value="放鬆">放鬆</ion-select-option>
-        </ion-select>
+        <ion-toolbar>
+          <ion-searchbar id="searchBar" placeholder="搜尋..." debounce="300"></ion-searchbar>
+          <ion-select id="categorySelect" placeholder="分類" interface="popover">
+            <ion-select-option value="">全部</ion-select-option>
+            <ion-select-option value="初學者">初學者</ion-select-option>
+            <ion-select-option value="中階">中階</ion-select-option>
+            <ion-select-option value="高階">高階</ion-select-option>
+            <ion-select-option value="放鬆">放鬆</ion-select-option>
+          </ion-select>
+        </ion-toolbar>
       </ion-header>
 
       <ion-content>
-        <ion-list id="poseList">
-          <!-- 清單將由 JavaScript 動態生成 -->
-        </ion-list>
+        <ion-list id="poseList"></ion-list>
       </ion-content>
     </ion-app>
 
     <script>
       const items = [
         {
-          title: '下犬式',
-          level: '初階',
-          benefits: '伸展脊椎、腿後肌群',
-          caution: '肩頸受傷者請避免',
-          category: '初學者',
-          tags: ['腿部', '背部'],
-          imageUrl: 'https://hips.hearstapps.com/hmg-prod/images/gettyimages-1066259462-665f07385f296.jpg?crop=1.00xw:0.755xh;0,0&resize=1200:*',
-          videoUrl: 'https://www.youtube.com/embed/YwFOL6vFfhE'
+          "title": "下犬式",
+          "level": "初階",
+          "benefits": "伸展脊椎、腿後肌群",
+          "caution": "肩頸受傷者請避免",
+          "category": "初學者",
+          "tags": ["腿部", "背部"],
+          "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/gettyimages-1066259462-665f07385f296.jpg?crop=1.00xw:0.755xh;0,0&resize=1200:*",
+          "videoUrl": "https://www.youtube.com/watch?v=YwFOL6vFfhE"
         },
         {
-          title: '戰士二式',
-          level: '中階',
-          benefits: '強化腿部、提升穩定性',
-          caution: '膝蓋問題請注意角度',
-          category: '強化',
-          tags: ['腿部', '核心'],
-          imageUrl: 'https://via.placeholder.com/300x300?text=Warrior+II',
-          videoUrl: 'https://www.youtube.com/embed/u1a8ICIQS90'
+          "title": "山式",
+          "level": "初階",
+          "benefits": "改善姿勢、減少背部疼痛",
+          "caution": "坐骨神經痛、或骶骨有病變的人謹慎練習",
+          "category": "初學者",
+          "tags": ["腿部", "臀腿肌"],
+          "imageUrl": "https://www.myprotein.cn/images?url=https://blogscdn.thehut.net/app/uploads/sites/496/2020/09/iStock-664637374opt_blog_1594303946_1599036799.jpg&format=webp&auto=avif&width=750&height=500&fit=crop",
+          "videoUrl": "https://www.youtube.com/watch?v=oZPIr7HTmtc"
         },
         {
-          title: '樹式',
-          level: '初階',
-          benefits: '提升平衡感與專注力',
-          caution: '避免站不穩時跌倒',
-          category: '平衡',
-          tags: ['平衡', '集中'],
-          imageUrl: 'https://via.placeholder.com/300x300?text=Tree+Pose',
-          videoUrl: 'https://www.youtube.com/embed/s8n-IU7e1V4'
+          "title": "戰士二式",
+          "level": "中階",
+          "benefits": "強化腿部、提升穩定性",
+          "caution": "膝蓋問題請注意角度",
+          "category": "中階",
+          "tags": ["腿部", "核心"],
+          "imageUrl": "https://im.marieclaire.com.tw/s1200c675h100b0/assets/mc/202405/663B516B507C21715163499.jpeg",
+          "videoUrl": "https://www.youtube.com/watch?v=gIWl8Ptc3Po"
+        },
+        {
+          "title": "樹式",
+          "level": "初階",
+          "benefits": "提升平衡感與專注力",
+          "caution": "避免站不穩時跌倒",
+          "category": "初學者",
+          "tags": ["平衡", "集中"],
+          "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/young-woman-practicing-yoga-tree-pose-vrikshasana-royalty-free-image-1692262674.jpg?crop=1xw:1xh;center,top&resize=980:*",
+          "videoUrl": "https://www.youtube.com/watch?v=B-YlXgKoF5s"
+        },  
+        {
+          "title": "眼鏡蛇式",
+          "level": "初階",
+          "benefits": "強化脊椎、舒緩背痛",
+          "caution": "避免腰椎受傷者使用",
+          "category": "初學者",
+          "tags": ["背部", "柔軟度"],
+          "imageUrl": "https://sportsplanetmag-aws.hmgcdn.com/public/article/atl_20190325161148_131.JPG",
+          "videoUrl": "https://www.youtube.com/watch?v=uom1GB5uCPE"
+        },
+        {
+          "title": "嬰兒式",
+          "level": "初階",
+          "benefits": "放鬆全身、減壓",
+          "caution": "孕婦避免長時間停留",
+          "category": "放鬆",
+          "tags": ["放鬆", "休息"],
+          "imageUrl": "https://miro.medium.com/v2/resize:fit:873/format:webp/0*7CF5CTAZAI6uPjet.jpeg",
+          "videoUrl": "https://www.youtube.com/watch?v=XBrgOjArdFs"
+        },
+        {
+          "title": "駱駝式",
+          "level": "高階",
+          "benefits": "伸展胸腔、活化脊椎",
+          "caution": "腰部不適者慎用",
+          "category": "高階",
+          "tags": ["後彎", "胸部"],
+          "imageUrl": "https://helloyogis.com/magazine/wp-content/uploads/sites/2/2022/09/image2-7-1536x839.jpg",
+          "videoUrl": "https://www.youtube.com/watch?v=KhFCRMFn6cg"
+        },
+        {
+          "title": "橋式",
+          "level": "中階",
+          "benefits": "強化臀部、打開胸口",
+          "caution": "頸椎有問題者避免",
+          "category": "中階",
+          "tags": ["核心", "胸部"],
+          "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/attractive-blonde-woman-in-sports-beige-leggings-royalty-free-image-1644486111.jpg?crop=1.00xw:0.756xh;0,0.125xh&resize=1200:*",
+          "videoUrl": "https://www.youtube.com/watch?v=D7iqica9coI"
+        },
+        {
+          "title": "魚式",
+          "level": "高階",
+          "benefits": "改善姿勢、打開胸腔",
+          "caution": "避免頸椎問題",
+          "category": "高階",
+          "tags": ["胸腔", "放鬆"],
+          "imageUrl": "https://sportsplanetmag-aws.hmgcdn.com/public/article/atl_20190325161054_834.jpg",
+          "videoUrl": "https://www.youtube.com/watch?v=V2SrE21zY5Y"
+        },
+        {
+          "title": "扭轉三角式",
+          "level": "高階",
+          "benefits": "改善消化、增加脊椎柔軟",
+          "caution": "背部僵硬者需小心",
+          "category": "高階",
+          "tags": ["扭轉", "核心"],
+          "imageUrl": "https://im.marieclaire.com.tw/m800c533h100b0/assets/mc/202408/66B1ECB6D0FBC1722936502.jpeg",
+          "videoUrl": "https://www.youtube.com/watch?v=HOQHXXUAYks"
+        },
+        {
+          "title": "椅子式",
+          "level": "中階",
+          "benefits": "強化腿部、臀部及核心肌群，改善平衡",
+          "caution": "膝蓋不應該超過腳尖，保持背部直立，注意呼吸",
+          "category": "中階",
+          "tags": ["腿部", "臀部"],
+          "imageUrl": "https://sportsplanetmag-aws.hmgcdn.com/public/article/atl_20190325161100_179.jpg",
+          "videoUrl": "https://www.youtube.com/watch?v=lenzTexk1uk"
+        },
+        {
+          "title": "展臂式",
+          "level": "初階",
+          "benefits": "舒展胸部，增強肩膀及手臂肌肉的靈活性",
+          "caution": "保持肩膀放鬆，不要聳肩，雙手應該與肩膀平行",
+          "category": "初階",
+          "tags": ["胸部", "肩膀"],
+          "imageUrl": "https://as.chdev.tw/web/images/article_data/picture_path/img_77463_c5348da0-32e9-48ad-9c04-bbb1803abd90.jpg",
+          "videoUrl": "https://www.youtube.com/watch?v=d8u0O1CbXr8"
+        },
+        {
+          "title": "前屈式",
+          "level": "中階",
+          "benefits": "拉伸大腿後側、脊椎及腰部，放鬆肩膀",
+          "caution": "避免彎曲膝蓋，保持脊椎延展，並注意呼吸",
+          "category": "初學者",
+          "tags": ["腿部", "脊椎"],
+          "imageUrl": "https://www.myprotein.cn/images?url=https://blogscdn.thehut.net/app/uploads/sites/496/2020/09/iStock-546803996opt_blog_1594304341_1599037620.jpg&format=webp&auto=avif&width=750&height=500&fit=crop",
+          "videoUrl": "https://www.youtube.com/watch?v=ziHqIVfBADA"
+        },
+        {
+          "title": "花環式",
+          "level": "高階",
+          "benefits": "開展胸部及脊椎，提升靈活性，強化臀部及腿部",
+          "caution": "肩背部應該自然弯曲，保持雙腳平行於地面，避免腰部過度壓迫",
+          "category": "初學者",
+          "tags": ["腿部", "背部"],
+          "imageUrl": "https://www.myprotein.cn/images?url=https://blogscdn.thehut.net/app/uploads/sites/496/2020/09/iStock-1203232207opt_blog_1594304416_1599037856.jpg&format=webp&auto=avif&width=750&height=500&fit=crop",
+          "videoUrl": "https://www.youtube.com/watch?v=rD2-EiJqT28"
+        },
+        {
+          "title": "",
+          "level": "初階",
+          "benefits": "伸展脊椎、腿後肌群",
+          "caution": "肩頸受傷者請避免",
+          "category": "初學者",
+          "tags": ["腿部", "背部"],
+          "imageUrl": "",
+          "videoUrl": ""
+        },
+        {
+          "title": "",
+          "level": "初階",
+          "benefits": "伸展脊椎、腿後肌群",
+          "caution": "肩頸受傷者請避免",
+          "category": "初學者",
+          "tags": ["腿部", "背部"],
+          "imageUrl": "",
+          "videoUrl": ""
+        },
+        {
+          "title": "",
+          "level": "初階",
+          "benefits": "伸展脊椎、腿後肌群",
+          "caution": "肩頸受傷者請避免",
+          "category": "初學者",
+          "tags": ["腿部", "背部"],
+          "imageUrl": "",
+          "videoUrl": ""
+        },
+        {
+          "title": "半鴿式",
+          "level": "中階",
+          "benefits": "打開髖部、釋放情緒",
+          "caution": "髖關節緊繃者需緩慢",
+          "category": "中階",
+          "tags": ["髖部", "伸展"],
+          "imageUrl": "https://media.vogue.com.tw/photos/5db7e542c2e36100085af5dc/master/w_1600,c_limit/2018010348835249.jpg",
+          "videoUrl": "https://www.youtube.com/watch?v=3mY-6KK_-8s"
         }
       ];
 
       let searchKeyword = '';
       let selectedCategory = '';
 
-      // 更新顯示清單的函數
+      function extractYouTubeID(url) {
+        const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+        return match ? match[1] : '';
+      }
+
       function updateList() {
-        const list = document.querySelector('ion-list');
+        const list = document.getElementById('poseList');
         list.innerHTML = '';
 
-        const filteredItems = items.filter(item => {
-          // 過濾邏輯：同時考慮搜尋關鍵字和分類
-          const matchesSearch = item.title.toLowerCase().includes(searchKeyword.toLowerCase()) ||
-                                item.benefits.toLowerCase().includes(searchKeyword.toLowerCase());
-          const matchesCategory = selectedCategory ? item.category === selectedCategory : true;
+        const filtered = items.filter(item => {
+          const keywordMatch =
+            searchKeyword === '' ||
+            item.title.toLowerCase().includes(searchKeyword) ||
+            item.benefits.toLowerCase().includes(searchKeyword) ||
+            item.tags.some(tag => tag.toLowerCase().includes(searchKeyword));
 
-          return matchesSearch && matchesCategory;
+          const categoryMatch =
+            selectedCategory === '' || item.category === selectedCategory;
+
+          return keywordMatch && categoryMatch;
         });
 
-        // 將過濾後的項目動態顯示
-        filteredItems.forEach(item => {
+        filtered.forEach(item => {
           const ionItem = document.createElement('ion-item');
           ionItem.innerHTML = `
             <div class="item-content">
               <div class="item-title">${item.title}</div>
               <div class="item-subtitle">難度：${item.level}</div>
               <div class="item-details">效果：${item.benefits}<br>注意事項：${item.caution}</div>
-              <img src="${item.imageUrl}" alt="${item.title}" style="width: 100%; max-width: 300px; margin-top: 0.5rem;" />
-              <div style="margin-top: 0.5rem;">
-                <iframe width="100%" height="200" src="${item.videoUrl}" frameborder="0" allowfullscreen></iframe>
-              </div>
+              <img src="${item.imageUrl}" alt="${item.title}" />
+              <iframe src="https://www.youtube.com/embed/${extractYouTubeID(item.videoUrl)}" frameborder="0" allowfullscreen></iframe>
               <div class="tag-container">
-                <ion-chip size="small" color="primary">${item.category}</ion-chip>
-                ${item.tags.map(tag => `<ion-chip size="small">${tag}</ion-chip>`).join('')}
+                <ion-chip color="primary">${item.category}</ion-chip>
+                ${item.tags.map(tag => `<ion-chip>${tag}</ion-chip>`).join('')}
               </div>
             </div>
           `;
@@ -145,23 +308,17 @@
         });
       }
 
-      // 監聽搜尋框的輸入
-      document.querySelector('ion-searchbar').addEventListener('ionInput', (event) => {
-        searchKeyword = event.target.value;
+      document.getElementById('searchBar').addEventListener('ionInput', e => {
+        searchKeyword = e.target.value.toLowerCase();
         updateList();
       });
 
-      // 監聽分類選擇改變事件
-      document.querySelector('ion-select').addEventListener('ionChange', (event) => {
-        selectedCategory = event.detail.value;
+      document.getElementById('categorySelect').addEventListener('ionChange', e => {
+        selectedCategory = e.target.value;
         updateList();
       });
 
-      // 當頁面加載完成時顯示清單
-      document.addEventListener('DOMContentLoaded', () => {
-        updateList();
-      });
+      document.addEventListener('DOMContentLoaded', updateList);
     </script>
   </body>
 </html>
-
