@@ -1,11 +1,12 @@
 const items = [
   {
     "title": "下犬式",
-    "level": "初階",
-    "benefits": "伸展脊椎、腿後肌群",
-    "caution": "坐骨神經痛、或骶骨有病變的人謹慎練習",
-    "category": "初學者",
-    "tags": ["腿部", "背部"],
+    "level": "中階",
+    "benefits": "伸展脊椎、腿後肌群，強化肩膀、腕部力量",
+    "caution": "有肩膀、脊椎、腿部傷痛者應謹慎練習",
+    "practiceNote": "腿部保持平衡，慢慢放開，避免強迫雙腿完全伸直，根據自己的靈活度進行調整",
+    "category": "中階",
+    "tags": ["腿部", "背部", "肩部"],
     "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/gettyimages-1066259462-665f07385f296.jpg?crop=1.00xw:0.755xh;0,0&resize=1200:*",
     "videoUrl": "https://www.youtube.com/watch?v=YwFOL6vFfhE"
   },
@@ -48,12 +49,12 @@ const items = [
     "tags": ["背部", "柔軟度"],
     "imageUrl": "https://via.placeholder.com/300x300?text=Cobra+Pose",
     "videoUrl": "https://www.youtube.com/watch?v=3A6OeM8t2ac"
-  },
-  // 輸入剩餘瑜伽資料...
+  }
 ];
 
 let searchKeyword = '';
 let selectedCategory = '';
+let selectedLevel = '';
 
 function extractYouTubeID(url) {
   const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
@@ -64,29 +65,27 @@ function updateList() {
   const list = document.getElementById('poseList');
   list.innerHTML = '';
 
-  const filtered = items.filter(item => {
-    const keywordMatch =
-      searchKeyword === '' ||
-      item.title.toLowerCase().includes(searchKeyword) ||
-      item.benefits.toLowerCase().includes(searchKeyword) ||
-      item.tags.some(tag => tag.toLowerCase().includes(searchKeyword));
+  const filteredItems = items.filter(item => {
+    const matchesSearch = item.title.toLowerCase().includes(searchKeyword) || item.benefits.toLowerCase().includes(searchKeyword);
+    const matchesCategory = selectedCategory ? item.category === selectedCategory : true;
 
-    const categoryMatch =
-      selectedCategory === '' || item.category === selectedCategory;
-
-    return keywordMatch && categoryMatch;
+    return matchesSearch && matchesCategory;
   });
 
-  filtered.forEach(item => {
+  filteredItems.forEach(item => {
     const ionItem = document.createElement('ion-item');
     ionItem.innerHTML = `
       <div class="item-content">
         <div class="item-title">${item.title}</div>
         <div class="item-subtitle">難度：${item.level}</div>
         <div class="item-details">
-          效果：${item.benefits}<br>
-          注意事項：${item.caution}<br>
-          練習時注意事項：${item.caution}
+          效果：${item.benefits}
+        </div>
+        <div class="caution-details">
+          練習時建議：${item.practiceNote}
+        </div>
+        <div class="caution-details" style="color: red;">
+          注意: ${item.caution}
         </div>
         <img src="${item.imageUrl}" alt="${item.title}" />
         <iframe src="https://www.youtube.com/embed/${extractYouTubeID(item.videoUrl)}" frameborder="0" allowfullscreen></iframe>
@@ -112,3 +111,31 @@ document.getElementById('categorySelect').addEventListener('ionChange', e => {
 });
 
 document.addEventListener('DOMContentLoaded', updateList);
+
+document.querySelectorAll('#categoryButtons ion-button').forEach(button => {
+  button.addEventListener('click', () => {
+    selectedCategory = button.value;
+    updateList();
+
+    // Highlight active button
+    document.querySelectorAll('#categoryButtons ion-button').forEach(btn => btn.removeAttribute('color'));
+    button.setAttribute('color', 'primary');
+  });
+});
+
+document.querySelectorAll('#categoryButtons ion-button').forEach(button => {
+  button.addEventListener('click', () => {
+    selectedCategory = button.value;
+    updateList();
+
+    // 將所有按鈕都重設為 outline
+    document.querySelectorAll('#categoryButtons ion-button').forEach(btn => {
+      btn.setAttribute('fill', 'outline');
+      btn.removeAttribute('color');
+    });
+
+    // 將被選中的按鈕 set 做填滿 + primary 色
+    button.setAttribute('fill', 'solid');
+    button.setAttribute('color', 'primary');
+  });
+});
