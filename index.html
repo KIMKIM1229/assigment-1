@@ -16,20 +16,19 @@
           <ion-title>瑜伽動作清單</ion-title>
         </ion-toolbar>
         <ion-toolbar>
-          <div id="categoryButtons" class="category-button-group">
-            <ion-button fill="outline" value="">全部</ion-button>
-            <ion-button fill="outline" value="平衡">平衡</ion-button>
-            <ion-button fill="outline" value="核心">核心</ion-button>
-            <ion-button fill="outline" value="靈活性">靈活性</ion-button>
-            <ion-button fill="outline" value="強化">強化</ion-button>
-            <ion-button fill="outline" value="拉伸">拉伸</ion-button>
-            <ion-button fill="outline" value="放鬆">放鬆</ion-button>
-          </div>
+          <div id="typeButtons" class="category-button-group">
+            <ion-button value="" fill="solid" color="primary">全部</ion-button>
+            <ion-button value="放鬆" fill="outline">放鬆</ion-button>
+            <ion-button value="拉伸" fill="outline">拉伸</ion-button>
+            <ion-button value="強化" fill="outline">強化</ion-button>        
+            <ion-button value="平衡" fill="outline">平衡</ion-button>          
+          </div>      
           
-          <ion-searchbar id="searchBar" placeholder="搜尋..." debounce="300"></ion-searchbar>
-          <ion-select id="categorySelect" placeholder="分類" interface="popover">
-            <ion-select-option value="">全部</ion-select-option>
-            <ion-select-option value="初學者">初學者</ion-select-option>
+          <ion-searchbar id="searchBar" placeholder="搜尋瑜伽名稱或功效..." debounce="300"></ion-searchbar>
+          
+          <ion-select id="categorySelect" placeholder="等級分類" interface="popover">
+            <ion-select-option value="">等級分類</ion-select-option>
+            <ion-select-option value="初階">初階</ion-select-option>
             <ion-select-option value="中階">中階</ion-select-option>
             <ion-select-option value="高階">高階</ion-select-option>            
           </ion-select>
