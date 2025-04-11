@@ -251,6 +251,7 @@ const items = [
     "level": "初階",
     "benefits": "強化腹部、腰部、背部和臀部肌肉，提升核心穩定性，改善平衡能力，促進消化",
     "caution": "避免背部過度弓起，保持正確姿勢，若有腰部或背部受傷，應謹慎練習",
+    "practiceNote":"雙手可輔助支撐在地面上協助平衡，逐漸練習將雙腳抬離地面，專注收緊核心，保持自然呼吸",
     "category": "初階",
     "type": "強化",
     "bodypart": ["腹部", "背部"],
@@ -279,59 +280,13 @@ function updateList() {
       item.title.toLowerCase().includes(searchKeyword) ||
       item.benefits.toLowerCase().includes(searchKeyword) ||
       item.practiceNote?.toLowerCase().includes(searchKeyword);
-  
+
     const matchCategory = selectedCategory ? item.category === selectedCategory : true;
     const matchType = selectedType && selectedType !== '全部' ? item.type === selectedType : true;
-    const matchBodyPart = selectedBodyPart && selectedBodyPart !== '全部'
-  ? item.bodypart.includes(selectedBodyPart)
-  : true;
+    const matchBodyPart = selectedBodyPart && selectedBodyPart !== '全部' ? item.tags.includes(selectedBodyPart) : true;
 
     return matchKeyword && matchCategory && matchType && matchBodyPart;
-});
-  
-function resetFilters() {
-  // 重設過濾條件
-  searchKeyword = '';
-  selectedCategory = '';
-  selectedType = '';
-  selectedBodyPart = '';
-
-  // 清空輸入框與下拉選單值
-  document.getElementById('searchBar').value = '';
-  document.getElementById('categorySelect').value = '';
-  document.getElementById('typeSelect').value = '';
-  document.getElementById('bodyPartSelect').value = '';
-
-  // 清除所有類型按鈕的選中效果
-  document.querySelectorAll('#typeButtons ion-button').forEach(btn => {
-    btn.setAttribute('fill', 'outline'); // 還原為 outline
-    btn.removeAttribute('color');        // 移除 primary 顏色
   });
-
-  // 更新列表
-  updateList();
-}
-
-
-  function renderItems(filteredItems) {
-    const listContainer = document.getElementById('itemList');  // 假設這係你用來顯示項目的容器
-  
-    listContainer.innerHTML = '';  // 清空列表，避免重複渲染
-  
-    // 遍歷過濾後嘅項目並顯示
-    filteredItems.forEach(item => {
-      const listItem = document.createElement('ion-item');  // 創建新的 'ion-item' 元素
-  
-      // 你可以根據需要設定顯示內容
-      listItem.textContent = item.title;  // 顯示標題
-  
-      // 如果你想加入其他資訊（例如圖像或鏈接），可以在這裡添加
-      // 例如: listItem.innerHTML = `<img src="${item.imageUrl}" alt="${item.title}"> ${item.title}`;
-  
-      listContainer.appendChild(listItem);  // 將創建嘅項目加入到容器
-    });
-  }
-  
 
   filteredItems.forEach(item => {
     const ionItem = document.createElement('ion-item');
@@ -360,56 +315,67 @@ function resetFilters() {
   });
 }
 
+function resetFilters() {
+  // Reset all filter values
+  searchKeyword = '';
+  selectedCategory = '';
+  selectedType = '';
+  selectedBodyPart = '';
 
-document.getElementById('searchBar').addEventListener('ionInput', e => {
-  searchKeyword = e.target.value.toLowerCase();
-  updateList();
-});
+  // Reset UI input values
+  document.getElementById('searchBar').value = '';
+  document.getElementById('categorySelect').value = '';
+  document.getElementById('typeSelect').value = '';
+  document.getElementById('bodyPartSelect').value = '';
 
-document.getElementById('categorySelect').addEventListener('ionChange', e => {
-  selectedCategory = e.target.value;
-  updateList();
-});
-
-document.getElementById('typeSelect').addEventListener('ionChange', e => {
-  selectedType = e.target.value;
-  updateList();
-});
-
-document.getElementById('bodyPartSelect').addEventListener('ionChange', e => {
-  selectedBodyPart = e.target.value;
-  updateList();
-});
-
-
-document.addEventListener('DOMContentLoaded', updateList);
-
-document.getElementById('resetButton').addEventListener('click', resetFilters);
-
-document.querySelectorAll('ion-button').forEach(button => {
-  button.addEventListener('click', (e) => {
-    selectedType = e.target.value;  // 記錄所選按鈕的值
-    updateList();
-
-    // 高亮目前按下的按鈕
-    document.querySelectorAll('#typeButtons ion-button').forEach(btn => btn.removeAttribute('color'));
-    button.setAttribute('color', 'primary');
+  // Reset type button UI
+  document.querySelectorAll('#typeButtons ion-button').forEach(btn => {
+    btn.setAttribute('fill', 'outline');
+    btn.removeAttribute('color');
   });
-});
 
-document.querySelectorAll('#typeButtons ion-button').forEach(button => {
-  button.addEventListener('click', () => {
-    selectedType = button.value;  // 更新為按鈕的 value
-    updateList();  // 更新顯示的列表
+  updateList();
+}
 
-    // 高亮顯示選中的按鈕
-    document.querySelectorAll('#typeButtons ion-button').forEach(btn => {
-      btn.setAttribute('fill', 'outline');
-      btn.removeAttribute('color');
+document.addEventListener('DOMContentLoaded', () => {
+  updateList();
+
+  document.getElementById('searchBar').addEventListener('ionInput', e => {
+    searchKeyword = e.target.value.toLowerCase();
+    updateList();
+  });
+
+  document.getElementById('categorySelect').addEventListener('ionChange', e => {
+    selectedCategory = e.target.value;
+    updateList();
+  });
+
+  document.getElementById('typeSelect').addEventListener('ionChange', e => {
+    selectedType = e.target.value;
+    updateList();
+  });
+
+  document.getElementById('bodyPartSelect').addEventListener('ionChange', e => {
+    selectedBodyPart = e.target.value;
+    updateList();
+  });
+
+  // 重設按鈕
+  document.getElementById('resetButton').addEventListener('click', resetFilters);
+
+  // 類型按鈕
+  document.querySelectorAll('#typeButtons ion-button').forEach(button => {
+    button.addEventListener('click', () => {
+      selectedType = button.value;
+      updateList();
+
+      document.querySelectorAll('#typeButtons ion-button').forEach(btn => {
+        btn.setAttribute('fill', 'outline');
+        btn.removeAttribute('color');
+      });
+
+      button.setAttribute('fill', 'solid');
+      button.setAttribute('color', 'primary');
     });
-
-    // 設置選中按鈕的填滿顏色和 primary 顏色
-    button.setAttribute('fill', 'solid');
-    button.setAttribute('color', 'primary');
   });
 });
