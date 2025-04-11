@@ -7,6 +7,7 @@ const items = [
     "practiceNote": "腿部保持平衡，慢慢放開，避免強迫雙腿完全伸直，根據自己的靈活度進行調整",
     "category": "中階",
     "type": "拉伸", 
+    "bodypart": ["腿部", "背部", "肩部"],
     "tags": ["拉伸","腿部", "背部", "肩部"],
     "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/gettyimages-1066259462-665f07385f296.jpg?crop=1.00xw:0.755xh;0,0&resize=1200:*",
     "videoUrl": "https://www.youtube.com/watch?v=YwFOL6vFfhE"
@@ -19,6 +20,7 @@ const items = [
     "practiceNote": "保持全身放鬆，注意腳跟與腳尖對齊，避免過度緊張或脊椎彎曲，專注於穩定和平衡",
     "category": "初階",
     "type": "拉伸", 
+    "bodypart": ["腿部", "臀腿肌"],
     "tags": ["拉伸","腿部", "臀腿肌"],
     "imageUrl": "https://www.myprotein.cn/images?url=https://blogscdn.thehut.net/app/uploads/sites/496/2020/09/iStock-664637374opt_blog_1594303946_1599036799.jpg&format=webp&auto=avif&width=750&height=500&fit=crop",
     "videoUrl": "https://www.youtube.com/watch?v=oZPIr7HTmtc"
@@ -31,6 +33,7 @@ const items = [
     "practiceNote": "保持膝蓋與腳尖對齊，保持穩定，避免過度彎曲膝蓋，確保雙腳位置穩定，呼吸平穩",
     "category": "中階",
     "type": "強化", 
+    "bodypart": ["腿部"],
     "tags": ["強化","腿部", "核心"],
     "imageUrl": "https://im.marieclaire.com.tw/s1200c675h100b0/assets/mc/202405/663B516B507C21715163499.jpeg",
     "videoUrl": "https://www.youtube.com/watch?v=gIWl8Ptc3Po"
@@ -43,6 +46,7 @@ const items = [
     "practiceNote": "保持雙腳穩定，將一腳放在另一腳的大腿內側，避免膝蓋過度彎曲，專注於呼吸和平衡",
     "category": "初階",
     "type": "平衡", 
+    "bodypart": ["腿部"],
     "tags": ["平衡", "集中", "腿部"],
     "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/young-woman-practicing-yoga-tree-pose-vrikshasana-royalty-free-image-1692262674.jpg?crop=1xw:1xh;center,top&resize=980:*",
     "videoUrl": "https://www.youtube.com/watch?v=B-YlXgKoF5s"
@@ -55,6 +59,7 @@ const items = [
     "practiceNote": "練習時保持背部伸展，胸部打開，避免過度使用腰部力量，專注於脊椎的伸展",
     "category": "初階",
     "type": "強化", 
+    "bodypart": ["背部", "脊椎"],
     "tags": ["強化", "背部", "脊椎", "柔軟度"],
     "imageUrl": "https://sportsplanetmag-aws.hmgcdn.com/public/article/atl_20190325161148_131.JPG",
     "videoUrl": "https://www.youtube.com/watch?v=uom1GB5uCPE"
@@ -67,6 +72,7 @@ const items = [
     "practiceNote": "練習時放鬆全身，讓額頭輕輕接觸地面，呼吸深長，專注於釋放緊張",
     "category": "初階",
     "type": "放鬆",
+    "bodypart": ["脊椎", "背部"],
     "tags": ["放鬆", "脊椎", "背部"],
     "imageUrl": "https://miro.medium.com/v2/resize:fit:873/format:webp/0*7CF5CTAZAI6uPjet.jpeg",
     "videoUrl": "https://www.youtube.com/watch?v=XBrgOjArdFs"
@@ -79,6 +85,7 @@ const items = [
     "practiceNote": "保持穩定的呼吸，逐步加深後彎，避免過度拉伸，並注意脊椎的自然弧度",
     "category": "中階",
     "type": "拉伸",
+    "bodypart": ["胸部", "背部"],
     "tags": ["拉伸", "背部", "胸部"],
     "imageUrl": "https://helloyogis.com/magazine/wp-content/uploads/sites/2/2022/09/image2-7-1536x839.jpg",
     "videoUrl": "https://www.youtube.com/watch?v=KhFCRMFn6cg"
@@ -91,6 +98,7 @@ const items = [
     "practiceNote": "保持雙腳平行，腿部穩定，逐步提高臀部，避免腰部過度承受壓力", 
     "category": "初階",
     "type": "強化",
+    "bodypart": ["臀部", "腿部", "背部"],
     "tags": ["強化", "臀部", "腿部", "背部"],
     "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/attractive-blonde-woman-in-sports-beige-leggings-royalty-free-image-1644486111.jpg?crop=1.00xw:0.756xh;0,0.125xh&resize=1200:*",
     "videoUrl": "https://www.youtube.com/watch?v=D7iqica9coI"
@@ -103,6 +111,7 @@ const items = [
     "practiceNote": "保持雙腿伸直，腳尖指向天花板，慢慢放下頭部並感覺脊椎拉伸，避免過度施力",
     "category": "中階",
     "type": "拉伸",
+    "bodypart": ["脊柱", "胸部", "頸部"],
     "tags": ["拉伸","脊柱", "胸部", "頸部"],
     "imageUrl": "https://sportsplanetmag-aws.hmgcdn.com/public/article/atl_20190325161054_834.jpg",
     "videoUrl": "https://www.youtube.com/watch?v=V2SrE21zY5Y"
@@ -115,6 +124,7 @@ const items = [
     "practiceNote": "保持雙腿伸直，腳尖指向正前方，逐漸轉動上半身，保持骨盆穩定，避免過度扭轉",
     "category": "中階",
     "type": "拉伸",
+    "bodypart": ["脊柱", "腿部", "背部"],
     "tags": ["拉伸","脊柱", "腿部", "背部"],
     "imageUrl": "https://im.marieclaire.com.tw/m800c533h100b0/assets/mc/202408/66B1ECB6D0FBC1722936502.jpeg",
     "videoUrl": "https://www.youtube.com/watch?v=HOQHXXUAYks"
@@ -127,6 +137,7 @@ const items = [
     "practiceNote": "膝蓋應該對齊腳尖，背部保持挺直，臀部向後坐，避免讓膝蓋過度向前延伸",
     "category": "初階",
     "type": "強化",
+    "bodypart": ["腿部", "臀部"],
     "tags": ["強化","腿部", "臀部", "核心"],
     "imageUrl": "https://sportsplanetmag-aws.hmgcdn.com/public/article/atl_20190325161100_179.jpg",
     "videoUrl": "https://www.youtube.com/watch?v=lenzTexk1uk"
@@ -139,6 +150,7 @@ const items = [
     "practiceNote": "保持雙腳穩定，將手臂展開並平行於地面，保持呼吸平穩，避免肩膀過度緊張",
     "category": "中階",
     "type": "拉伸",
+    "bodypart": ["胸部", "背部", "肩部"],
     "tags": ["拉伸","肩部", "胸部", "背部"],
     "imageUrl": "https://as.chdev.tw/web/images/article_data/picture_path/img_77463_c5348da0-32e9-48ad-9c04-bbb1803abd90.jpg",
     "videoUrl": "https://www.youtube.com/watch?v=d8u0O1CbXr8"
@@ -151,6 +163,7 @@ const items = [
     "practiceNote": "雙腳保持適當距離，慢慢向前彎曲身體，保持脊椎自然伸展，避免拱背",
     "category": "初階",
     "type": "拉伸",
+    "bodypart": ["腿部", "背部", "脊椎"],
     "tags": ["拉伸","腿部", "背部", "脊椎"],
     "imageUrl": "https://www.myprotein.cn/images?url=https://blogscdn.thehut.net/app/uploads/sites/496/2020/09/iStock-546803996opt_blog_1594304341_1599037620.jpg&format=webp&auto=avif&width=750&height=500&fit=crop",
     "videoUrl": "https://www.youtube.com/watch?v=ziHqIVfBADA"
@@ -163,6 +176,7 @@ const items = [
     "practiceNote": "進入姿勢時，雙腳穩定，肩膀向後拉開，保持脊椎挺直。避免過度用力，保持呼吸均勻",
     "category": "高階",
     "type": "強化",
+    "bodypart": ["腿部", "背部", "肩膀"],
     "tags": ["強化", "腿部", "背部", "肩膀" ],
     "imageUrl": "https://www.myprotein.cn/images?url=https://blogscdn.thehut.net/app/uploads/sites/496/2020/09/iStock-1203232207opt_blog_1594304416_1599037856.jpg&format=webp&auto=avif&width=750&height=500&fit=crop",
     "videoUrl": "https://www.youtube.com/watch?v=rD2-EiJqT28"
@@ -175,6 +189,7 @@ const items = [
     "practiceNote": "保持身體一條直線，從頭到腳要均衡用力，避免脊椎下沉或拱起，並專注於呼吸",
     "category": "中階",
     "type": "強化",
+    "bodypart": ["肩膀", "背部"],
     "tags": ["強化", "核心", "肩膀", "背部"],
     "imageUrl": "https://today-obs.line-scdn.net/0hwdIq_ozAKEt0CDixqE9XHExeJDpHbjJCVmxgJAQOcHtbJGtPQGl7KFMJcGdQMWYaVG1jK1ZcdS9QPWZNGA/w1200",
     "videoUrl": "https://www.youtube.com/watch?v=75WMMqgYcbQ"
@@ -187,6 +202,7 @@ const items = [
     "practiceNote": "保持脊椎延伸，胸部向上打開，避免肩膀緊繃，專注於呼吸並保持穩定",
     "category": "初階",
     "type": "拉伸",
+    "bodypart": ["背部", "肩部"],
     "tags": ["拉伸","背部", "肩部"],
     "imageUrl": "https://p0.itc.cn/q_70/images03/20210119/ebcaf2cf14d349c19fb9994a508340f7.jpeg",
     "videoUrl": "https://www.youtube.com/watch?v=_vpi1wsuQ1c"
@@ -199,7 +215,8 @@ const items = [
     "practiceNote": "雙腿屈膝，膝蓋向兩側展開，保持背部直立，避免壓迫膝部，並根據個人靈活度調整角度",
     "category": "中階",
     "type": "拉伸",
-    "tags": ["拉伸", "大腿", "髖部"],
+    "bodypart": ["大腿", "腹部"],
+    "tags": ["拉伸", "大腿", "腹部"],
     "imageUrl": "https://s.yimg.com/ny/api/res/1.2/fbnv6UPkFMzGRpg6yxQgqQ--/YXBwaWQ9aGlnaGxhbmRlcjt3PTk2MDtoPTYwMDtjZj13ZWJw/https://media.zenfs.com/en/ctwant_fashion_656/b307af959524f2878ee14521ed28d956",
     "videoUrl": "https://www.youtube.com/watch?v=6Qd9ycfG5c0"
   },
@@ -211,7 +228,8 @@ const items = [
     "practiceNote": "將一條腿屈膝置於前，另一條腿向後延伸，保持骨盆穩定，避免背部過度彎曲，保持呼吸均勻",
     "category": "中階",
     "type": "拉伸",
-    "tags": ["拉伸","臀部", "髖部", "大腿"],
+    "bodypart": ["臀部", "腹部", "大腿"],
+    "tags": ["拉伸","臀部", "腹部", "大腿"],
     "imageUrl": "https://media.vogue.com.tw/photos/5db7e542c2e36100085af5dc/master/w_1600,c_limit/2018010348835249.jpg",
     "videoUrl": "https://www.youtube.com/watch?v=3mY-6KK_-8s"
   },
@@ -223,6 +241,7 @@ const items = [
     "practiceNote": "將一隻手從身體下方伸出，向上拉伸並旋轉上半身，另一隻手放在背部或地板上，保持穩定的呼吸，避免過度扭轉脊椎",
     "category": "中階",
     "type": "拉伸",
+    "bodypart": ["脊椎", "背部", "肩部"],
     "tags": ["拉伸","肩部", "背部", "脊椎"],
     "imageUrl": "https://image.hkhl.hk/f/1024p0/0x0/100/none/c5806355bc62b98632869bc568d9f7a9/images/_2021103015322989092.jpg",
     "videoUrl": "https://www.youtube.com/watch?v=eml2jDNe8mc"
@@ -234,15 +253,17 @@ const items = [
     "caution": "避免背部過度弓起，保持正確姿勢，若有腰部或背部受傷，應謹慎練習",
     "category": "初階",
     "type": "強化",
+    "bodypart": ["腹部", "背部"],
     "tags": ["強化","腹部", "核心", "背部"],
     "imageUrl": "https://hips.hearstapps.com/hmg-prod/images/young-attractive-sporty-woman-doing-boat-pose-grey-royalty-free-image-1656298379.jpg?crop=1.00xw:0.756xh;0,0.159xh&resize=1200:*",
     "videoUrl": "https://www.youtube.com/watch?v=NH78J_dhO94"
-  },
+  }
 ];
 
 let searchKeyword = '';
 let selectedCategory = '';
 let selectedType = '';
+let selectedBodyPart = '';
 
 function extractYouTubeID(url) {
   const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
@@ -261,10 +282,37 @@ function updateList() {
   
     const matchCategory = selectedCategory ? item.category === selectedCategory : true;
     const matchType = selectedType && selectedType !== '全部' ? item.type === selectedType : true;
+    const matchBodyPart = selectedBodyPart && selectedBodyPart !== '全部'
+  ? item.bodypart.includes(selectedBodyPart)
+  : true;
+
+    return matchKeyword && matchCategory && matchType && matchBodyPart;
+});
   
-    return matchKeyword && matchCategory && matchType;
+function resetFilters() {
+  // 重設過濾條件
+  searchKeyword = '';
+  selectedCategory = '';
+  selectedType = '';
+  selectedBodyPart = '';
+
+  // 清空輸入框與下拉選單值
+  document.getElementById('searchBar').value = '';
+  document.getElementById('categorySelect').value = '';
+  document.getElementById('typeSelect').value = '';
+  document.getElementById('bodyPartSelect').value = '';
+
+  // 清除所有類型按鈕的選中效果
+  document.querySelectorAll('#typeButtons ion-button').forEach(btn => {
+    btn.setAttribute('fill', 'outline'); // 還原為 outline
+    btn.removeAttribute('color');        // 移除 primary 顏色
   });
-  
+
+  // 更新列表
+  updateList();
+}
+
+
   function renderItems(filteredItems) {
     const listContainer = document.getElementById('itemList');  // 假設這係你用來顯示項目的容器
   
@@ -323,7 +371,20 @@ document.getElementById('categorySelect').addEventListener('ionChange', e => {
   updateList();
 });
 
+document.getElementById('typeSelect').addEventListener('ionChange', e => {
+  selectedType = e.target.value;
+  updateList();
+});
+
+document.getElementById('bodyPartSelect').addEventListener('ionChange', e => {
+  selectedBodyPart = e.target.value;
+  updateList();
+});
+
+
 document.addEventListener('DOMContentLoaded', updateList);
+
+document.getElementById('resetButton').addEventListener('click', resetFilters);
 
 document.querySelectorAll('ion-button').forEach(button => {
   button.addEventListener('click', (e) => {
