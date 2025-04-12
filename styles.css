@@ -17,17 +17,36 @@ body {
     font-size: 1.2em;
   }
   
+  .title-bold {
+    font-weight: bold;
+  }
   .item-subtitle {
     color: var(--ion-color-medium);
     margin: 0.25rem 0;
   }
 
+  .soft-toolbar {
+    --background: 	#b0d0e9;  /* Soft sky blue 背景 */
+    --color: #2c3e50;       /* 深藍字 */
+  }
+  
+  .reset-btn {
+    --background: #ccc;       /* 預設灰色 */
+    --color: #fff;            /* 字白色 */
+    --border-radius: 12px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .reset-btn:active {
+    --background: #92a8d1;    /* 按住時閃藍色 */
+  }
+  
   .card {
-    background: var(--ion-color-light);
+    background: white;
     border-radius: 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    padding: 1rem;
-    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    padding: 1.25rem;
+    margin-bottom: 2rem;
   }
   
   .item-details,
@@ -87,5 +106,8 @@ body {
     height: 100%;
   }
   
-
-
+  /* 只改 ion-content 區域背景 */
+.main-content {
+  --background: #fdeee6; /* 柔和肉色 */
+  background-color: #fdeee6;
+}

@@ -12,10 +12,11 @@
   <body>
     <ion-app>
       <ion-header>
-        <ion-toolbar color="primary">
-          <ion-title>Yoga Pose List</ion-title>
+        <ion-toolbar class="soft-toolbar">
+          <ion-title class="title-bold">Yoga Pose List</ion-title>
         </ion-toolbar>
         <ion-toolbar>
+          
                    
           <ion-searchbar id="searchBar" placeholder="搜尋瑜伽名稱或功效..." debounce="300"></ion-searchbar>
           
@@ -27,7 +28,7 @@
           </ion-select>
 
           <ion-select id="typeSelect" placeholder="類型" interface="popover">
-            <ion-select-option value="全部">全部</ion-select-option>
+            <ion-select-option value="">類型</ion-select-option>
             <ion-select-option value="拉伸">拉伸</ion-select-option>
             <ion-select-option value="強化">強化</ion-select-option>
             <ion-select-option value="平衡">平衡</ion-select-option>
@@ -35,7 +36,7 @@
           </ion-select>
 
           <ion-select id="bodyPartSelect" placeholder="部位" interface="popover">
-            <ion-select-option value="">全部</ion-select-option>
+            <ion-select-option value="">部位</ion-select-option>
             <ion-select-option value="腿部">腿部</ion-select-option>
             <ion-select-option value="背部">背部</ion-select-option>
             <ion-select-option value="肩部">肩部</ion-select-option>
@@ -51,12 +52,12 @@
       </ion-header>
 
     </ion-item>
+    <ion-button id="resetButton" class="reset-btn">重設</ion-button>
 
-    <ion-button id="resetButton" expand="block" color="medium">重設</ion-button>
-
-      <ion-content>
-        <ion-list id="poseList"></ion-list>
-      </ion-content>
+    <ion-content class="main-content"></ion-content>
+    <div style="padding: 1rem;">測試一下背景色～</div>
+      <ion-list id="poseList"></ion-list>
+    </ion-content>
     </ion-app>
 
     <script src="app.js"></script>

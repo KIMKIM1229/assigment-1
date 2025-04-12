@@ -291,7 +291,7 @@ function updateList() {
   filteredItems.forEach(item => {
     const ionItem = document.createElement('ion-item');
     ionItem.innerHTML = `
-      <div class="item-content">
+      <div class="card item-content">
         <div class="item-title">${item.title}</div>
         <div class="item-subtitle">難度：${item.level}</div>
         <div class="item-details">
